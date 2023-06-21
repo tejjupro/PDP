@@ -55,7 +55,6 @@
     .operations button {
       margin: 0 5px;
       padding: 10px 20px;
-      background-color: #4caf50;
       color: #fff;
       border: none;
       border-radius: 4px;
@@ -63,8 +62,24 @@
       transition: background-color 0.3s ease;
     }
 
+    .add {
+      background-color: #4caf50;
+    }
+
+    .subtract {
+      background-color: #f44336;
+    }
+
+    .multiply {
+      background-color: #ff9800;
+    }
+
+    .divide {
+      background-color: #2196f3;
+    }
+
     .operations button:hover {
-      background-color: #45a049;
+      opacity: 0.8;
     }
 
     .result {
@@ -90,10 +105,10 @@
     </div>
 
     <div class="operations">
-      <button onclick="add()">Add</button>
-      <button onclick="subtract()">Subtract</button>
-      <button onclick="multiply()">Multiply</button>
-      <button onclick="divide()">Divide</button>
+      <button class="add" onclick="add()">Add</button>
+      <button class="subtract" onclick="subtract()">Subtract</button>
+      <button class="multiply" onclick="multiply()">Multiply</button>
+      <button class="divide" onclick="divide()">Divide</button>
     </div>
 
     <div class="result" id="result"></div>
