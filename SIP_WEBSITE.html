@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Compound Interest, SIP and EMI Calculator</title>
+  <style>
+    /* Add some basic styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f3f3f3;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .calculator {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #666;
+    }
+
+    input[type="number"] {
+      padding: 5px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    button {
+      display: block;
+      margin: 10px auto;
+      padding: 8px 16px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .result {
+      font-weight: bold;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Compound Interest, SIP and EMI Calculator</h1>
+
+  <div class="calculator">
+    <h2>Compound Interest Calculator</h2>
+    <label for="principal">Principal Amount:</label>
+    <input type="number" id="principal" min="0" step="any">
+    <br>
+    <label for="interest">Annual Interest Rate (%):</label>
+    <input type="number" id="interest" min="0" step="any">
+    <br>
+    <label for="years">Number of Years:</label>
+    <input type="number" id="years" min="0">
+    <br>
+    <button onclick="calculateCompoundInterest()">Calculate</button>
+    <div class="result" id="compoundInterestResult"></div>
+  </div>
+
+  <div class="calculator">
+    <h2>SIP Calculator</h2>
+    <label for="sipAmount">SIP Amount:</label>
+    <input type="number" id="sipAmount" min="0" step="any">
+    <br>
+    <label for="sipInterest">Annual Interest Rate (%):</label>
+    <input type="number" id="sipInterest" min="0" step="any">
+    <br>
+    <label for="sipYears">Number of Years:</label>
+    <input type="number" id="sipYears" min="0">
+    <br>
+    <button onclick="calculateSIP()">Calculate</button>
+    <div class="result" id="sipResult"></div>
+  </div>
+
+  <div class="calculator">
+    <h2>EMI Calculator</h2>
+    <label for="loanAmount">Loan Amount:</label>
+    <input type="number" id="loanAmount" min="0" step="any">
+    <br>
+    <label for="interestRate">Annual Interest Rate (%):</label>
+    <input type="number" id="interestRate" min="0" step="any">
+    <br>
+    <label for="loanTenure">Loan Tenure (in months):</label>
+    <input type="number" id="loanTenure" min="0">
+    <br>
+    <button onclick="calculateEMI()">Calculate</button>
+    <div class="result" id="emiResult"></div>
+  </div>
+
+  <script>
+    function calculateCompoundInterest() {
+      var principal = parseFloat(document.getElementById('principal').value);
+      var interestRate = parseFloat(document.getElementById('interest').value);
+      var years = parseInt(document.getElementById('years').value);
+
+      var interest = principal * (Math.pow((1 + interestRate / 100), years) - 1);
+      var totalAmount = principal + interest;
+
+      document.getElementById('compoundInterestResult').innerHTML = "Total Amount: " + totalAmount.toFixed(2);
+    }
+
+    function calculateSIP() {
+      var sipAmount = parseFloat(document.getElementById('sipAmount').value);
+      var sipInterestRate = parseFloat(document.getElementById('sipInterest').value);
+      var sipYears = parseInt(document.getElementById('sipYears').value);
+
+      var sipInterest = sipAmount * ((Math.pow((1 + sipInterestRate / 100), sipYears) - 1) / (sipInterestRate / 100));
+      var totalInvestment = sipAmount * sipYears;
+      var totalAmount = sipInterest + totalInvestment;
+
+      document.getElementById('sipResult').innerHTML = "Total Amount: " + totalAmount.toFixed(2);
+    }
+
+    function calculateEMI() {
+      var loanAmount = parseFloat(document.getElementById('loanAmount').value);
+      var interestRate = parseFloat(document.getElementById('interestRate').value);
+      var loanTenure = parseInt(document.getElementById('loanTenure').value);
+
+      var monthlyInterestRate = interestRate / 100 / 12;
+      var emi = loanAmount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, loanTenure) /
+          (Math.pow(1 + monthlyInterestRate, loanTenure) - 1);
+
+      document.getElementById('emiResult').innerHTML = "EMI: " + emi.toFixed(2);
+    }
+  </script>
+</body>
+</html>
